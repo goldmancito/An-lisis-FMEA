@@ -113,7 +113,7 @@ Los componentes de este sistema son:
 Teniendo  en  cuenta  las  características  de  los  equipos  y  su  operación durante el modo de operación normal, se indican las siguientes causas de falla del sistema:
 \begin{table}[H]
 \centering
-\begin{tabularx}{\textwidth}{XXXXX}
+\begin{tabularx}{\textwidth}{XXXXc}
 \toprule
 \multicolumn{3}{c}{Descripción de unidad} & \multicolumn{2}{c}{Descripción de falla} \\
 \midrule
@@ -121,14 +121,16 @@ Función & Equipo & Modo de falla & Mecanismo de \newline falla & N° referencia
 \\
 \midrule
 \multirow{2}{7em}{Compensa la caída de presión debido a fricción en cañerías y equipos} & \multirow{2}{7em}{Sistema de bombeo de baja presión} & \multirow{2}{7em}{Presión fuera del rango de diseño} & Falta de energía eléctrica & 1.a \\
- & & & Falla de los sellos &  1.b \\ \\ \\ \\ \\
+ & & & Falla de los sellos &  1.b \\ \\ \\ \\\midrule
 \multirow{2}{7em}{Entrega potencia térmica al fluido refrigerante primario} & \multirow{2}{7em}{Sistema de resistencias calefactoras} & \multirow{2}{7em}{Temperatura fuera del rango de diseño} & Falla eléctrica \newline total & 2.a \\
-& & & Baja tensión &  2.b \\ \\ \\ \\ \\
-\multirow{2}{7em}{Mantiene la presión del sistema mediante la presurización del tomo. Regula los cambios de volumen debido a transientes de temperatura} & \multirow{2}{7em}{Tanque presurizador o tanque de expansión} & \multirow{2}{7em}{Presión fuera del rango de diseño} & Ingreso de aire \newline durante el venteo & 3.a \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+& & & Baja tensión &  2.b \\ \\ \\ \\\midrule
+\multirow{2}{7em}{Mantiene la presión del sistema mediante la presurización del tomo. Regula los cambios de volumen debido a transientes de temperatura} & \multirow{2}{7em}{Tanque presurizador o tanque de expansión} & \multirow{2}{7em}{Presión fuera del rango de diseño} & Ingreso de aire \newline durante el venteo & 3.a \\
+ & & & Fuga externa &  3.b\\ \\ \\ \\ \\ \\ \\ \\ \\\midrule
 \multirow{2}{7em}{Cede la potencia térmica al sistema secundario} & \multirow{2}{7em}{Generador de vapor} & \multirow{2}{7em}{Temperatura fuera del rango de diseño} & Corrosión y picado en el interior de los tubos & 4.a \\
- & & & Infuga hacia el sistema secundario &  4.b \\ \\
-Remueve material particulado presente en el fluido refrigerante & Sistema de filtros & Conductividad del fluido refrigerante excesiva & Bloqueo del filtro & 5 \\ \\
+ & & & Infuga hacia el sistema secundario &  4.b \\\midrule
+Remueve material particulado presente en el fluido refrigerante & Sistema de filtros & Conductividad del fluido refrigerante excesiva & Bloqueo del filtro & 5 \\\midrule
 Condensa vapor proveniente del sistema de resistencias y del tanque presurizador & Condensador de aceite & Presión fuera del rango de diseño & Ensuciamiento & 6 \\
+\bottomrule
 \end{tabularx}
 \caption{Fallas en el sistema}
 \end{table}
@@ -197,18 +199,60 @@ Para la determinación de los valores de los índices, se aplican los siguientes
     \item Todas las fallas ocasionadas por fugas o daños internos se consideran imposibles de identificar, y se les asigna una detección de nivel 10.
     \item En cuanto al nivel de ocurrencia, la falla total de energía eléctrica es inadmisible pues produce una falla total, y tiene nivel 3. La baja de tensión produce una falla intermitente, y se le asigna nivel 1. Todas las demás fallas se pueden considerar parciales y graduales, y se les asigna nivel 2; es decir, se acepta que ocurran con baja frecuencia.
 \end{itemize}
-\begin{landscape}
 \begin{table}[H]
 \centering
-\begin{tabular}{cccccccccc}
+\begin{tabularx}{\textwidth}{XXccccc}
 \toprule
-\multicolumn{3}{c}{Descripción de unidad} & \multicolumn{2}{c}{Descripción de falla} &  &  & & & \\
-N° referencia & Función & Equipo & Modo de falla & Mecanismo de falla & Efecto de la falla & Severidad (S) & Ocurrencia (O) & Detección (D) & Medidas de \\
- & & & & & & & reducción de riesgo \\
+Equipo & Mecanismo de falla & N° referencia & S & O & D & RPN
+\\
+\midrule
+\multirow{2}{7em}{Sistema de bombeo de baja presión} & Falta de energía eléctrica & 1.a & 4 & 3 & 1 & 12 \\
+ & Falla de los sellos &  1.b & 4 & 2 & 10 & 80 \\ \\\midrule
+\multirow{2}{7em}{Sistema de resistencias calefactoras} & Falla eléctrica \newline total & 2.a & 3 & 3 & 1 & 9 \\
+ & Baja tensión &  2.b & 3 & 1 & 1 & 3 \\ \midrule
+\multirow{2}{7em}{Tanque presurizador o tanque de expansión} & Ingreso de aire \newline durante el venteo & 3.a & 4 & 2 & 10 & 80 \\
+ & Fuga externa &  3.b & 4 & 2 & 10 & 80\\ \\ \midrule
+\multirow{2}{7em}{Generador de vapor} & Corrosión y picado en el interior de los tubos & 4.a & 3 & 2 & 10 & 60 \\
+ & Infuga hacia el sistema secundario &  4.b & 3 & 2 & 10 & 60 \\\midrule
+Sistema de filtros & Bloqueo del filtro & 5 & 2 & 2 & 4 & 16 \\\midrule
+Condensador de aceite & Ensuciamiento & 6 & 4 & 2 & 10 & 80 \\
 \bottomrule
-\end{tabular}
-\caption{Análisis FMEA}
+\end{tabularx}
+\caption{Cálculo de RPN}
 \end{table}
-\end{landscape}
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    width=0.8\textwidth,
+    ybar,
+    ymin=0,
+    ymajorgrids = true,
+    ytick={0,0.1,...,1.1},
+    legend style={at={(0.5,-0.2)},
+      anchor=north,legend columns=-1},
+    ylabel={$RPN/RPN_{max}$},
+    xlabel={Causa de falla según componente},
+    symbolic x coords={1.a,1.b,2.a,%
+		2.b,3.a,3.b,4.a,4.b,5,6},
+    xtick=data,
+    nodes near coords, 
+	nodes near coords align={vertical},
+    x tick label style={rotate=45,anchor=east},
+    ]
+    \addplot[color=azulfrancia, fill=azulfrancia] coordinates {(1.a,0.1) (1.b,0.6666) 
+		(2.a,0.075) (2.b,0.025) (3.a,0.6666) (3.b,0.6666) (4.a,0.5) (4.b,0.5) (5,0.1333) (6,0.6666)};
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{Cálculo de RPN}
+\end{figure}
+Los índices de Probabilidad y Severidad pueden representarse en una matriz de riesgo:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.5\paperwidth,keepaspectratio]{matriz_riesgo.png}
+\end{center}
+\caption{Matriz de Riesgo}
+\end{figure}
 
 \end{document}
